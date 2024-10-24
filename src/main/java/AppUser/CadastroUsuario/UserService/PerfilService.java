@@ -21,19 +21,26 @@ public class PerfilService {
 
     private perfilRepository perfilRepository;
 
-    public String Atualizarbio(String bio,String Novadata) {
+    public String Atualizarbio(String Novabio,String Novadata) {
         Perfil perfil = new Perfil();
-        perfil.setBio(bio);
-        perfil.setDataNascimento(Novadata);
+        if (perfil == null) {
+            perfil.setBio(perfil.getBio());
+        } else {
+            perfil.setBio(Novabio);
+            perfil.setDataNascimento(Novadata);
+
+            return "Bio Atualizada!";
+        }
 
         return perfilRepository.save(perfil).getBio();
     }
 
-    public List<Perfil> perfilList(){
-        System.out.println("Lista De Perfils Cadastrados ");
-        List<Perfil> perfils = new ArrayList<>();
-           return perfilRepository.findAll();
-    }
+        public List<Perfil> perfilList () {
+            for (Perfil perfil : perfilRepository.findAll()) {
+                System.out.println(perfil.getBio());
+            }
+            return perfilRepository.findAll();
+        }
 
 
 
