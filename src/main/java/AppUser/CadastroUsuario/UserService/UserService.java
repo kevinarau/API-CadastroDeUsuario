@@ -18,9 +18,9 @@ public class UserService {
         if (userRepository.findByEmail(email) != null) {
             return "Email já Cadastrado";
         }
-           if (password.length() <= 6) {
-                return "Senha deve ter pelo menos  6 Caracteres";
-           }
+        if (password.length() <= 6) {
+            return "Senha deve ter pelo menos  6 Caracteres";
+        }
 
         User user = new User();
         user.setNome(nome);
@@ -32,47 +32,34 @@ public class UserService {
     }
 
 
-
-    public String validarLogin ( String email, String password ) {
+    public String validarLogin(String email, String password) {
         User user = userRepository.findByEmail(email);
-               if (user.getEmail() == null){
-                     return  "Usuario nao encontrado!";
-              }
+        if (user.getEmail() == null) {
+            return "Usuario nao encontrado!";
+        }
 
-                     if (!user.getPassword().equals(password)){
-                  return "Senha incorreta!";
-                     }
+        if (!user.getPassword().equals(password)) {
+            return "Senha incorreta!";
+        }
 
-                           return "redirct:/cadastrar";
+        return "redirct:/Login";
     }
 
 
-
-
-
-    public String AtualizarPerfil(Long id, String novoNome,String NovoPassword) {
+    public User AtualizarPerfil(Long id, User perfilAtualizado) {
         User user = userRepository.findById(id).orElse(null);
-        if (user == null){
-            return  "Usuario não encontrado!";
-            }
+        if (user.getPerfil() != null) {
+            user.setNome(perfilAtualizado.getNome());
+            user.setEmail(perfilAtualizado.getEmail());
+            user.setDataCastro(perfilAtualizado.getDataCastro());
+            user.setPassword(perfilAtualizado.getPassword());;
+            userRepository.save(user);
 
-          if (novoNome != null && novoNome.length() > 20) {
-                  user.setNome(novoNome);
-          }
-
-            if (NovoPassword != null && NovoPassword.length() >= 6) {
-                  user.setPassword(NovoPassword);
-            }
-                else if (NovoPassword.length() < 6) {
-              return   "A nova senha precisa ter pelo menos 6 caracteres.!";
-                }
-
-                userRepository.save(user);
-                   return "redirct:/atualizarPerfil ";
-
+        }
+    return user;
     }
 
-    public void deletaUsuario(long id){
+    public void deletaUsuario(long id) {
         userRepository.deleteById(id);
     }
 

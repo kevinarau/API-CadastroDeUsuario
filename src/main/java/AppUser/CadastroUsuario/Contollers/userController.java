@@ -1,23 +1,22 @@
 package AppUser.CadastroUsuario.Contollers;
 import AppUser.CadastroUsuario.Model.User;
 import AppUser.CadastroUsuario.UserService.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Users")
-public class userControlle {
+@RequestMapping("/users/{id}/perfil")
+public class userController {
 
     @Autowired
     private  UserService userService;
 
 
-    @GetMapping ("/cadastrar")
+    @PostMapping ("/cadastre")
     public ResponseEntity<String> cadastrarUsuario(@RequestParam String nome, @RequestParam String email, @RequestParam String senha) {
-        String cadastrarUsuario = userService.cadastrarUsuario(nome, email, senha);
-        return ResponseEntity.ok(cadastrarUsuario);
+        String cadastreUsuario = userService.cadastrarUsuario(nome, email, senha);
+        return ResponseEntity.ok(cadastreUsuario);
     }
 
 
@@ -28,13 +27,13 @@ public class userControlle {
     }
 
 
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<String> AtualizarPerfil(@PathVariable Long id, @RequestParam(required = false) String novoNome, @RequestParam(required = false) String novaSenha) {
-        String atualizarPerfil = userService.AtualizarPerfil(id, novoNome, novaSenha);
+    @PutMapping("/actualizer")
+    public ResponseEntity<User> AtualizarPerfil(@PathVariable Long id, @RequestParam(required = false) User perfilAtualizado) {
+        User atualizarPerfil = userService.AtualizarPerfil(id,perfilAtualizado);
         return ResponseEntity.ok(atualizarPerfil);
     }
 
-    @DeleteMapping("/Deletar/{id}")
+    @DeleteMapping("/Deleter")
     public void DeletarUsuario (@PathVariable Long id){
         userService.deletaUsuario(id);
     }

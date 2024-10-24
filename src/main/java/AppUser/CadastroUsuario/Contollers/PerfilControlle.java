@@ -13,30 +13,29 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/Perfil")
+@RequestMapping("users/{id}/perfil")
 public class PerfilControlle {
-
 
 
     @Autowired
     private PerfilService perfilService;
 
-    @GetMapping()
-    public List<Perfil> getList(){
+    @GetMapping("/GetList")
+    public List<Perfil> getList() {
         return perfilService.perfilList();
     }
 
     @PutMapping("/AtualizarBio")
-    private ResponseEntity<String> atualizarbio(@RequestParam (required = false)String bio,@RequestParam(required = false) String dataNasccimento){
-       String atulaizado = perfilService.Atualizarbio(bio, dataNasccimento);
-       return ResponseEntity.ok(atulaizado);
-   }
+    private ResponseEntity<String> atualizarbio(@RequestParam(required = false) String bio, @RequestParam(required = false) String dataNasccimento, @PathVariable(required = false) Integer Contato) {
+        String atulaizado = perfilService.Actualization(bio,dataNasccimento,Contato);
+        return ResponseEntity.ok(atulaizado);
+    }
 
 
-   @GetMapping("/ExibirBio")
-    private Perfil exibirBio(){
-        return perfilService.perfilList().set(0,new Perfil());
-   }
+    @GetMapping("/ExibirBio")
+    private Perfil exibirBio() {
+        return perfilService.perfilList().get(0);
+    }
 
 
 }

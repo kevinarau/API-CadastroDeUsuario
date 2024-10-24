@@ -13,6 +13,6 @@ public interface userRepository extends JpaRepository<User,Long> {
     void deleteById(Long id);
 
 
-    User save (User user);
+
 
 }

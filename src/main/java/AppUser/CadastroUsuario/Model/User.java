@@ -1,12 +1,11 @@
 package AppUser.CadastroUsuario.Model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 
 @Getter
@@ -29,19 +28,19 @@ public class User  {
     private String password;
 
     @NotEmpty
-    private String dataCadastro;
+    private String dataCastro;
 
 
     @OneToOne
-    private Perfil perifil;
+    private Perfil perfil;
 
 
-    public @NotEmpty String getDataCadastro() {
-        return dataCadastro;
+    public @NotEmpty String getDataCastro() {
+        return dataCastro;
     }
 
-    public void setDataCadastro(@NotEmpty String dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setDataCastro(@NotEmpty String dataCadastro) {
+        this.dataCastro = dataCadastro;
     }
 
     public @NotEmpty String getEmail() {

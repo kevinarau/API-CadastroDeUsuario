@@ -1,11 +1,13 @@
 package AppUser.CadastroUsuario.Model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 
 @Entity
@@ -16,6 +18,8 @@ public class Perfil implements Serializable{
     @Serial
      private static final long serialVersionUID = 1L;
 
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usuarioId;
@@ -25,9 +29,16 @@ public class Perfil implements Serializable{
 
     @NotEmpty
     private String dataNascimento;
+    @NotEmpty
+    private Integer Contact;
 
-   @OneToMany
-   private List<User> users;
+    public @NotEmpty Integer getCont() {
+        return Contact;
+    }
+
+    public void setCont(@NotEmpty Integer contact) {
+        Contact = contact;
+    }
 
     public @NotEmpty String getBio() {
         return bio;
@@ -45,20 +56,4 @@ public class Perfil implements Serializable{
         this.dataNascimento = dataNascimento;
     }
 
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public String getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(String usuarioId) {
-        this.usuarioId = usuarioId;
-    }
 }
