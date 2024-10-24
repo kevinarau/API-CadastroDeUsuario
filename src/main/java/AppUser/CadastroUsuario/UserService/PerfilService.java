@@ -31,9 +31,11 @@ public class PerfilService {
 
             return "Bio Atualizada!";
         }
-
         return perfilRepository.save(perfil).getBio();
     }
+
+
+
 
         public List<Perfil> perfilList () {
             for (Perfil perfil : perfilRepository.findAll()) {

@@ -16,22 +16,22 @@ public class userControlle {
 
     @GetMapping ("/cadastrar")
     public ResponseEntity<String> cadastrarUsuario(@RequestParam String nome, @RequestParam String email, @RequestParam String senha) {
-        String resposta = userService.cadastrarUsuario(nome, email, senha);
-        return ResponseEntity.ok(resposta);
+        String cadastrarUsuario = userService.cadastrarUsuario(nome, email, senha);
+        return ResponseEntity.ok(cadastrarUsuario);
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String email, @RequestParam String senha) {
-        String resposta = userService.validarLogin(email, senha);
-        return ResponseEntity.ok(resposta);
+        String Login = userService.validarLogin(email, senha);
+        return ResponseEntity.ok(Login);
     }
 
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<String> AtualizarPerfil(@PathVariable Long id, @RequestParam(required = false) String novoNome, @RequestParam(required = false) String novaSenha) {
-        String resposta = userService.AtualizarPerfil(id, novoNome, novaSenha);
-        return ResponseEntity.ok(resposta);
+        String atualizarPerfil = userService.AtualizarPerfil(id, novoNome, novaSenha);
+        return ResponseEntity.ok(atualizarPerfil);
     }
 
     @DeleteMapping("/Deletar/{id}")
