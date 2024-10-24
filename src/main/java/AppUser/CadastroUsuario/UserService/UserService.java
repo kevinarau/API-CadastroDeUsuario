@@ -27,7 +27,7 @@ public class UserService {
         user.setEmail(email);
         user.setPassword(password);
         userRepository.save(user);
-        return "Usuario Cdastrado";
+        return "Usuario Cadastrado";
     }
 
 
@@ -35,7 +35,7 @@ public class UserService {
     public String validarLogin ( String email, String password ) {
 
         User user = userRepository.findByEmail(email);
-               if (user == null){
+               if (user.getEmail() == null){
                      return  "Usuario nao encontrado!";
               }
 
@@ -50,12 +50,12 @@ public class UserService {
 
 
 
-    public String atualizarPerfil(Long id, String novoNome,String NovoPassword) {
+    public String AtualizarPerfil(Long id, String novoNome,String NovoPassword) {
         User user = userRepository.findById(id).orElse(null);
 
             if (user == null){
             return  "Usuario não encontrado!";
-                          }
+            }
 
         if (novoNome != null && novoNome.length() > 20) {
                   user.setNome(novoNome);
@@ -71,6 +71,10 @@ public class UserService {
         userRepository.save(user);
         return " Usuario salvo com sucesso!";
 
-
     }
+
+    public void deletaUsuario(long id){
+        userRepository.deleteById(id);
+    }
+
 }

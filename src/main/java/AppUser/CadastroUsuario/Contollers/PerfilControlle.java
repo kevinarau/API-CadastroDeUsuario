@@ -1,36 +1,42 @@
 package AppUser.CadastroUsuario.Contollers;
 
 
-import AppUser.CadastroUsuario.Repository.perfilRepository;
-import AppUser.CadastroUsuario.Repository.userRepository;
+import AppUser.CadastroUsuario.UserService.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import AppUser.CadastroUsuario.Model.Perfil;
-import AppUser.CadastroUsuario.Model.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
+@RequestMapping("/Perfil")
 public class PerfilControlle {
 
-    @Autowired
-    private userRepository ur;
+
 
     @Autowired
-    private perfilRepository pr;
+    private PerfilService perfilService;
 
-    @RequestMapping(value = "AtualizarPerfil", method = RequestMethod.GET)
-     public String atualizar(){
-      return  "Perfil/AtualizadoPerfil";
+    @GetMapping()
+    public List<Perfil> getList(){
+        return perfilService.perfilList();
     }
 
-    @RequestMapping(value = "ExibirPerfil",method = RequestMethod.GET)
-     public String exibir(){
-        return "Perfil/ExibirPerfil";
+    @PutMapping("/AtualizarBio")
+    private ResponseEntity<String> atualizarbio(@RequestParam (required = false)String bio,@RequestParam(required = false) String dataNasccimento){
+       String atulaizado = perfilService.Atualizarbio(bio, dataNasccimento);
+       return ResponseEntity.ok(atulaizado);
+   }
 
-     }
+
+   @GetMapping("/ExibirBio")
+    private Perfil exibirBio(){
+        return perfilService.perfilList().set(0,new Perfil());
+   }
+
 
 }
