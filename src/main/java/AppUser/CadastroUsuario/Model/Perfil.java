@@ -23,7 +23,7 @@ public class Perfil implements Serializable{
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String usuarioId;
+    private Long usuarioId;
 
     @NotEmpty
     private String bio;

@@ -1,7 +1,7 @@
 package AppUser.CadastroUsuario.UserService;
 
 import AppUser.CadastroUsuario.Model.User;
-import AppUser.CadastroUsuario.Repository.userRepository;
+import AppUser.CadastroUsuario.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class UserService {
 
 
     @Autowired
-    private userRepository userRepository;
+    private UserRepository userRepository;
 
 
     public String cadastrarUsuario(String nome, String email, String password) {
@@ -26,6 +26,7 @@ public class UserService {
         user.setNome(nome);
         user.setEmail(email);
         user.setPassword(password);
+        user.getRoles().add("users");
         userRepository.save(user);
 
         return "Redirct:/cadastra";
@@ -42,13 +43,13 @@ public class UserService {
             return "Senha incorreta!";
         }
 
-        return "redirct:/Login";
+        return "Logado com sucesso!";
     }
 
 
     public User AtualizarPerfil(Long id, User perfilAtualizado) {
         User user = userRepository.findById(id).orElse(null);
-        if (user.getPerfil() != null) {
+        if (user != null) {
             user.setNome(perfilAtualizado.getNome());
             user.setEmail(perfilAtualizado.getEmail());
             user.setDataCastro(perfilAtualizado.getDataCastro());
