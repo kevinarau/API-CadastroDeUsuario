@@ -8,6 +8,7 @@ import AppUser.CadastroUsuario.Repository.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class PerfilService {
     @Autowired
     private PerfilRepository perfilRepository;
 
-    public String Actualization(String Novabio, String Novadata, Integer NovoContato) {
+    public String AtualizaBio(String Novabio, LocalDate Novadata, String NovoContato) {
         Perfil perfil = new Perfil();
         if (perfil != null) {
             perfil.setBio(perfil.getBio());
@@ -32,7 +33,7 @@ public class PerfilService {
     }
 
 
-    public List<Perfil> perfilList () {
+    public List<Perfil> perfilLista () {
             System.out.println("LIST DE PERFIL");
         for (Perfil perfil  : perfilRepository.findAll()) {
             System.out.println(perfil.getUsuarioId());
@@ -41,8 +42,10 @@ public class PerfilService {
         }
 
     public void exbirBio() {
+
         System.out.println("Bio :" + perfilRepository.findByUsuarioId("1").getBio());
     }
 
 
-    }
+
+}

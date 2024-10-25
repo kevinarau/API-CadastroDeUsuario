@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @Entity
@@ -28,16 +29,16 @@ public class Perfil implements Serializable{
     private String bio;
 
     @NotEmpty
-    private String dataNascimento;
+    private LocalDate dataNascimento;
     @NotEmpty
-    private Integer Contact;
+    private String contato;
 
-    public @NotEmpty Integer getCont() {
-        return Contact;
+    public @NotEmpty String getCont() {
+        return contato;
     }
 
-    public void setCont(@NotEmpty Integer contact) {
-        Contact = contact;
+    public void setCont(@NotEmpty String contato) {
+        contato = contato;
     }
 
     public @NotEmpty String getBio() {
@@ -48,12 +49,11 @@ public class Perfil implements Serializable{
         this.bio = bio;
     }
 
-    public @NotEmpty String getDataNascimento() {
+    public @NotEmpty LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(@NotEmpty String dataNascimento) {
+    public void setDataNascimento(@NotEmpty LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
 }
